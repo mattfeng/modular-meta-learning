@@ -87,7 +87,7 @@ def test(model):
 if __name__ == "__main__":
     models = {}
     for i in range(100):
-        name = f"PixelNet_{i}"
+        name = "PixelNet_{}".format(i)
         model = PixelNet(name=name, image_size=28 * 28, pixels=10)
         optimizer = optim.Adam(model.parameters())
         models[name] = (model, optimizer)
@@ -101,9 +101,9 @@ if __name__ == "__main__":
             if torch.cuda.is_available():
                 model.cuda()
 
-            print(f"Training {name}: Pixels ({model.subset})")
+            print("Training {}: Pixels ({})".format(name, model.subset))
             train(model, epoch)
             test(model)
     
     for name, (model, _) in models.items():
-        print(f"{name:>12}: {model.accuracy:.1f} {model.subset}")
+        print("{:>12}: {:.1f} {}".format(name, model.accuracy, model.subset))
