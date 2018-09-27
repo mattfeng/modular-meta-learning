@@ -85,7 +85,7 @@ def test(model):
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)
     ))
-    model.accuracy = correct / len(test_loader.dataset)
+    model.accuracy = float(correct) / len(test_loader.dataset)
 
 if __name__ == "__main__":
     models = OrderedDict()
