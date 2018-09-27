@@ -5,6 +5,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.autograd import Variable
 import numpy as np
+from collections import OrderedDict
 
 transforms = transforms.Compose([
     transforms.ToTensor(),
@@ -87,7 +88,7 @@ def test(model):
     model.accuracy = correct / len(test_loader.dataset)
 
 if __name__ == "__main__":
-    models = {}
+    models = OrderedDict()
     for i in range(100):
         name = "PixelNet_{}".format(i)
         model = PixelNet(name=name, image_size=28 * 28, pixels=10)
