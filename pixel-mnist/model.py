@@ -96,8 +96,8 @@ if __name__ == "__main__":
         models[name] = (model, optimizer)
         print(model)
         print("Pixels chosen: {}".format(model.subset))
-    EPOCHS = 1
 
+    EPOCHS = 1
     for epoch in range(1, EPOCHS + 1):
         for name, (model, optimizer) in models.items():
             if torch.cuda.is_available():
@@ -106,6 +106,7 @@ if __name__ == "__main__":
             print("Training {}: Pixels ({})".format(name, model.subset))
             train(model, epoch)
             test(model)
+            print(model.accuracy)
     
     for name, (model, _) in models.items():
         print("{:>12}: {:.1f} {}".format(name, model.accuracy, model.subset))
