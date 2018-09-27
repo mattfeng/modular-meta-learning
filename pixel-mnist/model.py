@@ -39,4 +39,4 @@ class Pixel10Net(nn.Module):
         return F.log_softmax(x)
 
 model = Pixel10Net(image_size=28 * 28, pixels=10)
-model.cuda()
+print(model.cuda())
