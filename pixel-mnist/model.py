@@ -29,6 +29,8 @@ class PixelNet(nn.Module):
         self.pixels = pixels
         self.subset = set(np.random.choice(range(image_size), size=pixels, replace=False))
         self.subset_mask = torch.Tensor([p in self.subset for p in range(image_size)])
+        if torch.cuda.is_available():
+            self.subset_mask = self.subset_mask.cuda()
 
         self.fc0 = nn.Linear(image_size, 1000)
         self.fc1 = nn.Linear(1000, 50)
@@ -39,7 +41,7 @@ class PixelNet(nn.Module):
     
     def forward(self, x):
         x = x.view(-1, self.img_size) # reshape x into 1 x img_size
-        x = x * self.subset_mask
+        x *= self.subset_mask
         x = F.relu(self.fc0(x))
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
