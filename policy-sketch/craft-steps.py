@@ -18,7 +18,7 @@ def main():
     gc = 9
 
     steps = 0
-    T = 1000
+    T = 50000
     for t in range(T):
         r = 4
         c = 4
