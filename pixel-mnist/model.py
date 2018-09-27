@@ -38,5 +38,5 @@ class Pixel10Net(nn.Module):
         x = F.relu(self.fc2(x))
         return F.log_softmax(x)
 
-model = Pixel10Net(image_size=28 * 28)
+model = Pixel10Net(image_size=28 * 28, pixels=10)
 model.cuda()
