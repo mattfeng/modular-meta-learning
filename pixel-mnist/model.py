@@ -92,8 +92,7 @@ if __name__ == "__main__":
         optimizer = optim.Adam(model.parameters())
         models[name] = (model, optimizer)
         print(model)
-        print(f"Pixels chosen: {model.subset}")
-    
+        print("Pixels chosen: {}".format(model.subset))
     EPOCHS = 1
 
     for epoch in range(1, EPOCHS + 1):

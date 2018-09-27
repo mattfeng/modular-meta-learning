@@ -1,1 +1,1 @@
-# UROP
+# Learning and Intelligent Systems, UROP
