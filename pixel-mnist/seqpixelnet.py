@@ -13,16 +13,16 @@ class SeqPixelNet(nn.Module):
         self.INT_LAYER_SIZE = 30
         self.init_vec = torch.Tensor([np.random.normal() for i in range(self.INT_LAYER_SIZE)])
 
-        if torch.cuda.is_available():
-            self.subset_mask = self.subset_mask.cuda()
-
         self.accuracy = 0
 
         self.initial = nn.Linear(self.INT_LAYER_SIZE, 784)
 
         self.int1 = nn.Linear(785, 784)
+        self.int2 = nn.Linear(786, 784)
+        self.int3 = nn.Linear(787, 784)
+        self.int4 = nn.Linear(788, 784)
 
-        self.final1 = nn.Linear(786, 50)
+        self.final1 = nn.Linear(788, 50)
         self.final2 = nn.Linear(50, 10)
     
     def forward(self, img):
@@ -39,7 +39,6 @@ class SeqPixelNet(nn.Module):
         pix_1 = img[:, pix_1_ix]
 
         x = T.cat((x, pix_1), dim=-1)
-
         x = self.int1(x)
 
         x = F.log_softmax(x) # get the probabilities
@@ -47,6 +46,21 @@ class SeqPixelNet(nn.Module):
         pix_2 = img[:, pix_2_ix]
 
         x = T.cat((x, pix_1, pix_2), dim=-1)
+        x = self.int2(x)
+
+        x = F.log_softmax(x) # get the probabilities
+        pix_3_ix = T.argmax(x)
+        pix_3 = img[:, pix_2_ix]
+
+        x = T.cat((x, pix_1, pix_2, pix_3), dim=-1)
+        x = self.int3(x)
+
+        x = F.log_softmax(x) # get the probabilities
+        pix_4_ix = T.argmax(x)
+        pix_4 = img[:, pix_4_ix]
+
+        x = T.cat((x, pix_1, pix_2, pix_3, pix_4), dim=-1)
+        x = self.int4(x)
 
         x = F.relu(self.final1(x))
         x = F.relu(self.final2(x))
