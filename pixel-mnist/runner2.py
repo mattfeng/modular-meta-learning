@@ -66,7 +66,7 @@ def test(model):
 if __name__ == "__main__":
     name = "SeqPixelNet"
     model = SeqPixelNet(name=name, image_size=28 * 28, batch_size=64)
-    optimizer = optim.SGD(model.parameters(), lr=0.003)
+    optimizer = optim.Adam(model.parameters())
     print(model)
 
     EPOCHS = 10
