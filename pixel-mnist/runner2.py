@@ -66,10 +66,10 @@ def test(model):
 if __name__ == "__main__":
     name = "SeqPixelNet"
     model = SeqPixelNet(name=name, image_size=28 * 28, batch_size=64)
-    optimizer = optim.Adam(model.parameters())
+    optimizer = optim.SGD(model.parameters(), lr=0.003)
     print(model)
 
-    EPOCHS = 1
+    EPOCHS = 10
     for epoch in range(1, EPOCHS + 1):
         if torch.cuda.is_available():
             model.cuda()
