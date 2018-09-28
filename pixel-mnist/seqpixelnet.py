@@ -20,7 +20,6 @@ class SeqPixelNet(nn.Module):
         self.int1 = nn.Linear(785, 784)
         self.int2 = nn.Linear(786, 784)
         self.int3 = nn.Linear(787, 784)
-        self.int4 = nn.Linear(788, 784)
 
         self.final1 = nn.Linear(788, 50)
         self.final2 = nn.Linear(50, 10)
@@ -60,7 +59,6 @@ class SeqPixelNet(nn.Module):
         pix_4 = img[:, pix_4_ix]
 
         x = T.cat((x, pix_1, pix_2, pix_3, pix_4), dim=-1)
-        x = self.int4(x)
 
         x = F.relu(self.final1(x))
         x = F.relu(self.final2(x))
