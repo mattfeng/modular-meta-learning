@@ -32,7 +32,7 @@ class SeqPixelNet(nn.Module):
         if torch.cuda.is_available():
             x = x.cuda()
 
-        x = F.relu(self.initial(x))
+        x = self.initial(x)
         x = F.log_softmax(x) # get the probabilities
         pix_1_ix = T.argmax(x)
         pix_1 = img[:, pix_1_ix]
