@@ -1,0 +1,88 @@
+\documentclass{article}[11pt]
+
+\title{Responses to QMDP-net \cite{DBLP:journals/corr/KarkusHL17}}
+\author{Matthew Feng}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Important contributions}
+{\it
+In your opinion what is an important contribution of this paper? What is a limitation?
+}
+
+This paper is one of the first applications of value-iteration
+networks to POMDPs, which are considerably more complex than
+fully observable MDPs. The idea is to view neural networks
+as differentiable programs rather than function approximators.
+
+The network, once trained, is able to generalize, compared
+to other networks.
+
+Finally, one limitation is that it uses a very simple approximation
+algorithm for planning; using other algorithms may be more
+effective? (AMDP)?
+
+\section{Exploration vs. Exploitation}
+{\it
+POMDPs model partially observable problems.
+A POMDP policy has to trade off exploration vs. exploitation.
+In the case of partially observable grid navigation,
+what is exploration and what is exploitation?
+}
+\newline
+
+Exploration would encompass finding more information about its
+position in the grid-world, as well as figuring out
+associations between its observations and the floormap by
+changing views and positions without explicitly moving
+towards the goal.
+
+Exploitation would be using its belief in order to navigate
+towards to goal.
+
+\section{Optimality}
+{\it
+$Q_{MDP}$ is an algorithm for solving POMDPs.
+Does it give an optimal solution? Why?
+}
+\newline
+
+$Q_{MDP}$ uses the belief in order to average over the MDP optimal value
+function. It is an approximate algorithm, which is robust but
+not optimal. The $Q_{MDP}$ algorithm would be optimal if after following
+its policy for one time-step, the problem suddenly became fully
+observable.
+
+
+\section{QMDP-net vs. LSTM}
+{\it
+What is the important difference between QMDP-net and
+an LSTM network? Why does QMDP-net work better
+for the grid navigation task? 
+}
+\newline
+
+The QMDP-net differs from the LSTM network in its structure,
+designed to act as an algorithmic prior, rather than a general
+LSTM network. QMDP-net works better than LSTM because QMDP-net
+implicitly forces the network to develop a model of the
+environment and plan for the model, rather than just generate
+a sequence of moves (as an LSTM does).
+
+
+\section{Backpropagation through time}
+{\it
+Recurrent neural networks are often trained with
+backpropagation through time. What is backpropagation
+through time? Should we train QMDP-net with
+backpropagation through time?
+}
+\newline
+
+
+\bibliography{answers}
+\bibliographystyle{abbrv}
+
+\end{document}
